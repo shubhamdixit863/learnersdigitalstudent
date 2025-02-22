@@ -6,13 +6,22 @@ import (
 )
 
 func SliceList(slice []int) {
-	var a, b int
+	var start, end int
 	var final []int
-	fmt.Println("Enter start index: ")
-	fmt.Scanf("%d\n", &a)
-	fmt.Println("Enter end index: ")
-	fmt.Scanf("%d\n", &b)
-	final = slice[a:b]
+	for i := 0; i == 0; {
+
+		fmt.Println("Enter start index: ")
+		fmt.Scanf("%d\n", &start)
+		fmt.Println("Enter end index: ")
+		fmt.Scanf("%d\n", &end)
+		if start <= end {
+			i++
+		} else {
+			fmt.Println("starting index should be less than or equal to end index")
+		}
+	}
+
+	final = slice[start:end]
 	fmt.Println(final)
 	operations.Sum(final)
 	operations.Average(final)
