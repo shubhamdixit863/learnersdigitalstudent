@@ -10,5 +10,4 @@ func Average(arr []int) {
 	}
 	avg = float64(sum) / float64(len(arr))
 	fmt.Println("Average: ", avg)
-
 }

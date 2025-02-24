@@ -233,3 +233,4 @@ func gradeCalc(score int) string {
 func typeOfAlpha(){
 	// TODO:
 }
+
