@@ -4,7 +4,7 @@ create a banking application that takes following thing from the user
 2. Age
 3. Bank balance
 
-You have to write a function called FizzBuzz that argument as num
+You have to write a function called FizzBuzz that has argument as num
 if num is divisible by 3 print Fizz,
 if its divisible by 5 print Buzz, 
 if both then FizzBuzz

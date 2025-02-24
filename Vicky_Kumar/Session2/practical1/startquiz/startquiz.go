@@ -32,32 +32,3 @@ func printQuestion(questionNo int, question string, option1 string, option2 stri
 func checkAnswer(userAnswer int, correctAnswer int) bool {
 	return userAnswer == correctAnswer
 }
-
-// printQuestion(1, "In what year did the Great October Socialist Revolution take place?", )
-// var userAnswer int
-// fmt.Scanln(&userAnswer)
-// for {
-// 	if userAnswer < 0 || userAnswer > 4 {
-// 		fmt.Scanln(&userAnswer)
-// 	} else {
-// 		break
-// 	}
-// }
-// correct := checkAnswer(userAnswer, 1)
-// if correct {
-// 	fmt.Println("Correct!")
-// 	Total = Total + 1
-// }
-// printQuestion(2, "What is the largest lake in the world?", )
-// fmt.Scanln(&userAnswer)
-// for {
-// 	if userAnswer < 0 || userAnswer > 4 {
-// 		fmt.Scanln(&userAnswer)
-// 	} else {
-// 		break
-// 	}
-// }
-// correct = checkAnswer(userAnswer, 1)
-// if correct {
-// 	Total = Total + 1
-// }
