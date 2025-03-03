@@ -1,0 +1,48 @@
+{
+  "Employee": [
+    {
+      "id": 1,
+      "name": "Ayush",
+      "age": 22,
+      "salary": 86250.575,
+      "address": {
+        "street": "Housing Colony",
+        "city": "jamshedpur"
+      },
+      "skills": [
+        "Go",
+        "Docker",
+        "Kubernetes"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Aman",
+      "age": 23,
+      "salary": 74750,
+      "address": {
+        "street": "Telco",
+        "city": "Jamshedpur"
+      },
+      "skills": [
+        "SEO",
+        "Content Marketing"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Piyush",
+      "age": 23,
+      "salary": 69000,
+      "address": {
+        "street": "Astha City",
+        "city": "Jamshedpur"
+      },
+      "skills": [
+        "SEO",
+        "Content Marketing",
+        "Google Ads"
+      ]
+    }
+  ]
+}

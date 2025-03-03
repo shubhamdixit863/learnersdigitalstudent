@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Ayush",
+        "age": 22,
+        "department": "Engineering",
+        "salary": 75000.50,
+        "address": {
+            "street": "Housing Colony",
+            "city": "jamshedpur",
+            "zip_code": "831015"
+        },
+        "skills": ["Go", "Docker", "Kubernetes"]
+    },
+    {
+        "id": 2,
+        "name": "Piyush",
+        "age": 23,
+        "department": "Marketing",
+        "salary": 60000.00,
+        "address": {
+            "street": "Astha City",
+            "city": "Jamshedpur",
+            "zip_code": "831004"
+        },
+        "skills": ["SEO", "Content Marketing", "Google Ads"]
+    },
+    {
+        "id": 3,
+        "name": "Aman",
+        "age": 23,
+        "department": "Marketing",
+        "salary": 65000.00,
+        "address": {
+            "street": "Telco",
+            "city": "Jamshedpur",
+            "zip_code": "831003"
+        },
+        "skills": ["SEO", "Content Marketing"]
+    }
+
+]
