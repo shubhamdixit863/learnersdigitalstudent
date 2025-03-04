@@ -1,0 +1,53 @@
+[
+  {
+    "id": 102,
+    "name": "Robert Brown",
+    "age": 55,
+    "department": "Finance",
+    "salary": 93500.82500000001,
+    "address": {
+      "street": "456 Elm St",
+      "city": "New York",
+      "zipCode": "10001"
+    },
+    "skills": [
+      "Accounting",
+      "Excel",
+      "Financial Analysis"
+    ]
+  },
+  {
+    "id": 101,
+    "name": "Alice Johnson",
+    "age": 28,
+    "department": "Engineering",
+    "salary": 86250.575,
+    "address": {
+      "street": "123 Main St",
+      "city": "San Francisco",
+      "zipCode": "94107"
+    },
+    "skills": [
+      "Go",
+      "Kubernetes",
+      "Docker"
+    ]
+  },
+  {
+    "id": 103,
+    "name": "Emma White",
+    "age": 32,
+    "department": "HR",
+    "salary": 60000,
+    "address": {
+      "street": "789 Oak St",
+      "city": "Chicago",
+      "zipCode": "60601"
+    },
+    "skills": [
+      "Recruitment",
+      "Communication",
+      "Negotiation"
+    ]
+  }
+]
