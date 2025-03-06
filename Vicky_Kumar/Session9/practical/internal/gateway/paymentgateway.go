@@ -21,6 +21,20 @@ func (pg *PaymentGateway) RegisterProvider(provider services.PaymentProcessor) {
 }
 
 func (pg *PaymentGateway) ProcessPayment(providerName string, amount float64) (string, error) {
+	if amount < 0 {
+		var err error
+		switch pg.providers[providerName].(type) {
+		case *services.PayPalService:
+			err = utils.NewPayPalError("Amount can't be less than 0.")
+
+		case *services.RazorPayService:
+			err = utils.NewRazorPayError("Amount can't be less than 0.")
+
+		case *services.StripeService:
+			err = utils.NewStripeError("Amount can't be less than 0.")
+		}
+		return "", err
+	}
 	CID := utils.RandomID()
 	MID := utils.RandomID()
 	TID := utils.RandomID()
@@ -32,9 +46,6 @@ func (pg *PaymentGateway) ProcessPayment(providerName string, amount float64) (s
 	}
 	transactions.Transactions = append(transactions.Transactions, transaction)
 	detail := pg.providers[providerName].Pay(amount)
-	if detail == "" {
-		return "", fmt.Errorf("Some Error Occured. Try Again!")
-	}
 	return detail, nil
 }
 

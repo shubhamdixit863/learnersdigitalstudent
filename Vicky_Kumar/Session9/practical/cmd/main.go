@@ -24,7 +24,11 @@ func main() {
 	stripe := services.NewStripeService(stripeAPI)
 	PaymentGateway.RegisterProvider(stripe)
 
-	detail, _ := PaymentGateway.ProcessPayment("PayPal", 123.5)
+	detail, err := PaymentGateway.ProcessPayment("RazorPay", -23)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	fmt.Println(detail)
 	txnID := "12345"
 	detail2, _ := PaymentGateway.IssueRefund("PayPal", txnID)
