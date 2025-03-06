@@ -23,7 +23,8 @@ func (pg *PaymentGateway) ProcessPayment(providerName string, amount float64) (s
 	if !exists {
 		return "", errors.New("payment provider not found")
 	}
-	return provider.Pay(amount), nil
+	transaction, err := provider.Pay(amount)
+	return transaction, err
 }
 
 func (pg *PaymentGateway) IssueRefund(providerName, transactionID string) (string, error) {
@@ -31,5 +32,6 @@ func (pg *PaymentGateway) IssueRefund(providerName, transactionID string) (strin
 	if !exists {
 		return "", errors.New("payment provider not found")
 	}
-	return provider.Refund(transactionID), nil
+	transaction, err := provider.Refund(transactionID)
+	return transaction, err
 }

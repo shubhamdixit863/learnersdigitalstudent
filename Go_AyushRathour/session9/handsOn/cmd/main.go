@@ -9,16 +9,19 @@ import (
 
 func main() {
 	fmt.Println("Experience a seamless payment service")
+	clientid := "paypal-123"
+	apikey := "paypal-123"
+	merchantid := "paypal-123"
 
 	pg := gateway.NewPaymentGateway()
 
-	paypal := services.NewPaypal("paypal-123", "paypal-123", "paypal-123")
-	stripe := services.NewStripe("stripe-456", "stripe-456", "stripe-456")
-	razorpay := services.NewRazorpay("Razorpay-789", "RazorPay-789", "razorpay-789")
+	provider := services.NewPaypal(clientid, apikey, merchantid)
+	//provider1 := services.NewStripe(clientid, apikey, merchantid)
+	//razorpay := services.NewRazorpay("Razorpay-789", "RazorPay-789", "razorpay-789")
 
-	pg.RegisterProvider(paypal)
-	pg.RegisterProvider(stripe)
-	pg.RegisterProvider(razorpay)
+	pg.RegisterProvider(provider)
+	//pg.RegisterProvider(provider1)
+	//pg.RegisterProvider(razorpay)
 
 	paymentResponse, err := pg.ProcessPayment("PayPal", 100.50)
 	if err != nil {
@@ -27,7 +30,7 @@ func main() {
 		fmt.Println(paymentResponse)
 	}
 
-	refundResponse, err := pg.IssueRefund("Stripe", "txn-001")
+	refundResponse, err := pg.IssueRefund("PayPal", "txn-001")
 	if err != nil {
 		fmt.Println(err)
 	} else {
@@ -35,7 +38,7 @@ func main() {
 	}
 
 	fmt.Println("Extracting provider details:")
-	function.ExtractProviderDetails(paypal)
-	function.ExtractProviderDetails(stripe)
-	function.ExtractProviderDetails(razorpay)
+	function.ExtractProviderDetails(provider)
+	//function.ExtractProviderDetails(stripe)
+	//function.ExtractProviderDetails(razorpay)
 }

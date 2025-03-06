@@ -1,7 +1,7 @@
 package services
 
 type PaymentProcessor interface {
-	Pay(amount float64) string
-	Refund(transactionID string) string
+	Pay(amount float64) (string, error)
+	Refund(transactionID string) (string, error)
 	GetProviderName() string
 }
