@@ -8,8 +8,8 @@ type Razorpay struct {
 	MerchantID string
 }
 
-func NewRazorpay(client string, api string, merchant string) *PayPal {
-	return &PayPal{
+func NewRazorpay(client string, api string, merchant string) *Razorpay {
+	return &Razorpay{
 		ClientID:   client,
 		APIKey:     api,
 		MerchantID: merchant,

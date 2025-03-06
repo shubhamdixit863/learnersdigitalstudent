@@ -8,8 +8,8 @@ type Stripe struct {
 	MerchantID string
 }
 
-func NewStripe(client string, api string, merchant string) *PayPal {
-	return &PayPal{
+func NewStripe(client string, api string, merchant string) *Stripe {
+	return &Stripe{
 		ClientID:   client,
 		APIKey:     api,
 		MerchantID: merchant,
