@@ -1,0 +1,15 @@
+create a banking application that takes following thing from the user
+
+1. Name
+2. Age
+3. Bank balance
+
+You have to write a function called FizzBuzz that has argument as num
+if num is divisible by 3 print Fizz,
+if its divisible by 5 print Buzz, 
+if both then FizzBuzz
+
+
+write a program to take the user details as input Name, Age, Address
+convert the age into days
+print out the whole details
