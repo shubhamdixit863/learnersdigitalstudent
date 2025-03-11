@@ -1,9 +1,12 @@
 package main
 
-import ("fmt")
+import "fmt"
 
-func main(){
-	 a:= 10
-	 fmt.Scanf("%d", &a)
-	 fmt.Println(a)
+func main() {
+
+	go foo()
+}
+func foo() {
+	fmt.Println("Hello world")
+
 }
