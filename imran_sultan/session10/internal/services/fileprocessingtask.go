@@ -1,27 +1,31 @@
 package services
 
 import (
+	"errors"
 	"fmt"
 	"os"
 )
 
 type FileProcessing struct {
-	track []string
+	Filepath string
 }
 
-func NewTask() Task {
-
-	
+func NewFile() Task {
 	return &FileProcessing{
-		track: track=append(track, "im"),
+		Filepath: "",
 	}
 }
 
-func ReadFile(filename string) (string, error) {
-	data, err := os.ReadFile(filename)
-	if err != nil {
-		fmt.Println(err)
+func (f FileProcessing) Run() error {
+
+	data, err := os.ReadFile("../../data.txt")
+	if errors.Is(err, os.ErrNotExist) {
+
+		return err
+
 	}
-	return string(data), err
+
+	fmt.Println(string(data))
+	return nil
 
 }
