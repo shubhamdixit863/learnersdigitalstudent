@@ -1,8 +1,8 @@
 package services
 
 import (
-	"errors"
 	"fmt"
+	"session9/problems/internal/utils"
 )
 
 type PaymentGateway struct {
@@ -22,16 +22,26 @@ func (pg *PaymentGateway) RegisterProvider(provider PaymentProcessor) {
 func (pg *PaymentGateway) ProcessPayment(providerName string, amount float64) (string, error) {
 	provider, exists := pg.providers[providerName]
 	if !exists {
-		return "", errors.New("provider not registered")
+		return "", utils.NewGatewayError("Provider do not exists!", providerName)
 	}
+
+	if amount <= 0 {
+		return "", utils.NewGatewayError("Invalid Payment Amount", providerName)
+	}
+
 	return provider.Pay(amount), nil
 }
 
 func (pg *PaymentGateway) IssueRefund(providerName, transactionID string) (string, error) {
 	provider, exists := pg.providers[providerName]
 	if !exists {
-		return "", errors.New("provider not registered")
+		return "", utils.NewGatewayError("Provider do not exists!", providerName)
 	}
+
+	if transactionID == "" {
+		return "", utils.NewGatewayError("Invalid Transaction ID!", providerName)
+	}
+
 	return provider.Refund(transactionID), nil
 }
 

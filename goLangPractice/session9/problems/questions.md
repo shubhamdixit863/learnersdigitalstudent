@@ -74,3 +74,12 @@ Instructions
 
 • Use type assertion to extract and display provider-specific details.
 
+
+6. Create a custome error for different payment methods
+
+• Add return errors from methods, if the operation fails as the second argument
+
+• internal/services
+
+• internal/utils/errors.go//Paypal error
+
