@@ -8,23 +8,17 @@ import (
 
 func main() {
 
-	var generatorLog sync.WaitGroup
-	var processLog sync.WaitGroup
-	var aggregatorLog sync.WaitGroup
+	var wg sync.WaitGroup
 
 	logChan := make(chan string)
 	processedChan := make(chan model.LogEntry)
 
-	go services.GenerateService(logChan, &generatorLog)
-	go services.ParseLog(logChan, processedChan, &processLog)
-	go services.Aggregate(processedChan, &aggregatorLog)
+	go services.GenerateService(logChan, &wg)
+	go services.ParseLog(logChan, processedChan, &wg)
+	go services.Aggregate(processedChan, &wg)
 
-	generatorLog.Add(1)
-	processLog.Add(1)
-	aggregatorLog.Add(1)
+	wg.Add(3)
 
-	generatorLog.Wait()
-	processLog.Wait()
-	aggregatorLog.Wait()
+	wg.Wait()
 
 }
