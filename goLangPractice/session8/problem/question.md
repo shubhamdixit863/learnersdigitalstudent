@@ -1,4 +1,5 @@
-You are developing an Employee Management System where employee records are stored in JSON format. Your system needs to handle multiple employee records, process them, and generate summary reports.
+You are developing an Employee Management System where employee records are stored in JSON format.
+Your system needs to handle multiple employee records, process them, and generate summary reports.
 
 Requirements:
 

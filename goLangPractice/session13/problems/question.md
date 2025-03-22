@@ -1,4 +1,5 @@
-You are given a list of integers. Your task is to process each number concurrently using Goroutines while ensuring that the main function waits for all Goroutines to finish before printing a final message.
+You are given a list of integers. Your task is to process each number concurrently using Goroutines
+while ensuring that the main function waits for all Goroutines to finish before printing a final message.
 
 Each Goroutine should:
 

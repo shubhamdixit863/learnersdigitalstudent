@@ -1,4 +1,5 @@
-You need to design a Task Processing System in Golang that can execute various types of tasks while handling errors gracefully. The system should be built using structs, interfaces, and custom error handling.
+You need to design a Task Processing System in Golang that can execute various types of tasks
+while handling errors gracefully. The system should be built using structs, interfaces, and custom error handling.
 
 Requirements:
 

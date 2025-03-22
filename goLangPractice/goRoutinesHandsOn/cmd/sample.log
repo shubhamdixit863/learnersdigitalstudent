@@ -1,0 +1,24 @@
+INFO Starting service...
+DEBUG Loaded config from /etc/app.yaml
+ERROR Failed to connect to database
+INFO Retrying connection...
+DEBUG Retrying in 5s
+INFO Connection successful
+WARNING Deprecated API usage
+ERROR Timeout during request
+INFO Starting service...
+DEBUG Loaded config from /etc/app.yaml
+ERROR Failed to connect to database
+INFO Retrying connection...
+DEBUG Retrying in 5s
+INFO Connection successful
+WARNING Deprecated API usage
+ERROR Timeout during request
+INFO Starting service...
+DEBUG Loaded config from /etc/app.yaml
+ERROR Failed to connect to database
+INFO Retrying connection...
+DEBUG Retrying in 5s
+INFO Connection successful
+WARNING Deprecated API usage
+ERROR Timeout during request

@@ -5,11 +5,10 @@ import (
 	"sync"
 )
 
-var c = 9
-
 func main() {
 	var wg sync.WaitGroup
-	var mu sync.Mutex
+	//var mu sync.Mutex
+	var c = 9
 
 	for i := 0; i < 9; i++ {
 		wg.Add(1)
@@ -17,9 +16,9 @@ func main() {
 			defer wg.Done()
 
 			//Critical Section
-			mu.Lock()
+			//mu.Lock()
 			c = c + 1
-			mu.Unlock()
+			//mu.Unlock()
 		}()
 	}
 

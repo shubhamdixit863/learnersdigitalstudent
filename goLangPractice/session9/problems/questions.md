@@ -1,4 +1,5 @@
-You are tasked with designing a plugin-based payment gateway system that allows multiple payment providers (e.g., PayPal, Stripe, Razorpay) to integrate dynamically. The system should:
+You are tasked with designing a plugin-based payment gateway system that allows multiple payment providers
+(e.g., PayPal, Stripe, Razorpay) to integrate dynamically. The system should:
 
 1. Support multiple payment providers with different implementations.
 

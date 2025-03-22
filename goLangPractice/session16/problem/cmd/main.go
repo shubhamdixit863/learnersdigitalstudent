@@ -24,9 +24,7 @@ func main() {
 		for order := range orderQueue {
 			services.UpdateInventory(order, orderStatus, &mu)
 		}
-
 		close(orderStatus)
-
 	}()
 
 	wg.Add(1)
