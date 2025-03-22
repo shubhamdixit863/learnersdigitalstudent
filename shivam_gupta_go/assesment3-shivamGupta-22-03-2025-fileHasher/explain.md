@@ -20,7 +20,3 @@ A Go-based tool to compute SHA-256 hashes of all files in a directory concurrent
    Results are sent back through a channel.
 3. **Output**:
    The tool prints the filename and its corresponding hash.
-
-
-
-
