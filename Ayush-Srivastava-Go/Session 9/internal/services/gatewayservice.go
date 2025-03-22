@@ -1,6 +1,8 @@
 package services
 
-import "errors"
+import (
+	"payment-gateway/internal/util"
+)
 
 type PaymentGateway struct {
 	providers map[string]PaymentProcessor
@@ -19,7 +21,10 @@ func (pg *PaymentGateway) RegisterProvider(provider PaymentProcessor) {
 func (pg *PaymentGateway) ProcessPayment(providerName string, amount float64) (string, error) {
 	provider, ok := pg.providers[providerName]
 	if !ok {
-		return "", errors.New("invalid payment provider")
+
+		paymentError := util.NewPaymentError("Error while payment", providerName)
+
+		return "", paymentError
 	}
 	return provider.Pay(amount), nil
 }
@@ -27,7 +32,10 @@ func (pg *PaymentGateway) ProcessPayment(providerName string, amount float64) (s
 func (pg *PaymentGateway) IssueRefund(providerName string, transactionID string) (string, error) {
 	provider, ok := pg.providers[providerName]
 	if !ok {
-		return "", errors.New("invalid payment provider")
+
+		paymentError := util.NewPaymentError("Error while refund", providerName)
+
+		return "", paymentError
 	}
 	return provider.Refund(transactionID), nil
 }

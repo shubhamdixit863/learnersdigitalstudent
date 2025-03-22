@@ -33,7 +33,7 @@ func main() {
 	gateway.RegisterProvider(&Stripe)
 	gateway.RegisterProvider(&RazorPay)
 
-	transaction1ID := transaction.CreateTransaction("PayPal", 100.0)
+	transaction1ID := transaction.CreateTransaction("Payal", 100.0)
 	payement, err := gateway.ProcessPayment("PayPal", 100.0)
 
 	if err != nil {
@@ -58,7 +58,7 @@ func main() {
 	isTransaction2Completed := transaction.UpdateTransactionStatus(transaction2ID, "COMPLETED")
 	if !isTransaction2Completed {
 		fmt.Println("Transaction not found")
-	}
+	}		
 
 	services.GetProviderDetails(&PayPal)
 	services.GetProviderDetails(&Stripe)
