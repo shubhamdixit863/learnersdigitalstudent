@@ -1,0 +1,6 @@
+TransactionID,CustomerID,Product,Category,Quantity,Price
+1001,C123,Laptop,Electronics,1,1200.0
+1002,C124,Headphones,Electronics,2,80.0
+1003,C125,Laptop,Electronics,1,1150.0
+1004,C123,Mouse,Accessories,3,25.0
+1005,C126,Keyboard,Accessories,1,50.0

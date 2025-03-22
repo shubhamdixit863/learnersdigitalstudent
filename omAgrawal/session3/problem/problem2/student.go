@@ -1,6 +1,8 @@
 package student
 
-import "fmt"
+import (
+	"fmt"
+)
 
 var Student []string
 var Score []int

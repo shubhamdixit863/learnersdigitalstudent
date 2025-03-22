@@ -1,0 +1,25 @@
+ "invoice_number": "invoice1",
+  "customer_name": "Om Agrawal",
+  "purchase_date": "2025-03-21T12:25:34.2748161+05:30",
+  "items": [
+    {
+      "name": "Laptop",
+      "quantity": 1,
+      "price": 1299.99,
+      "subtotal": 1299.99
+    },
+    {
+      "name": "Mouse",
+      "quantity": 2,
+      "price": 25.5,
+      "subtotal": 51
+    },
+    {
+      "name": "Keyboard",
+      "quantity": 1,
+      "price": 85.75,
+      "subtotal": 85.75
+    }
+  ],
+  "total": 1436.74
+}
