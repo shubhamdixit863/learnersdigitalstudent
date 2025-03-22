@@ -1,55 +1,104 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
-	"services"
-	"session2/services"
+	"os"
+	"strings"
+	"sync"
 )
 
-// func square(num int) int {
-// 	c := num * num
-// 	return c
+// Configurable parameters
+const (
+	chunkSize = 2          // Number of lines per chunk
+	fileName  = "book.txt" // Input file name
+)
 
-// }
+// readChunks reads the file and sends chunks of lines to the channel
+func readChunks(filePath string, chunkSize int, out chan<- []string) error {
+	file, err := os.Open(filePath)
+	if err != nil {
+		close(out)
+		return err
+	}
+	defer file.Close()
+	defer close(out) // Ensures channel is closed properly
+
+	scanner := bufio.NewScanner(file)
+	var lines []string
+
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+		if len(lines) >= chunkSize {
+			out <- lines
+			lines = nil
+		}
+	}
+
+	if len(lines) > 0 {
+		out <- lines
+	}
+
+	return scanner.Err()
+}
+
+// countWords counts word frequencies in a given chunk
+func countWords(lines []string, out chan<- map[string]int, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	wordFreq := make(map[string]int)
+	for _, line := range lines {
+		words := strings.Fields(strings.ToLower(line))
+		for _, word := range words {
+			word = strings.Trim(word, ".,!?;:\"'()[]{}")
+			wordFreq[word]++
+		}
+	}
+	out <- wordFreq
+}
+
+// mergeResults aggregates word frequencies from all goroutines
+func mergeResults(in <-chan map[string]int) map[string]int {
+	finalFreq := make(map[string]int)
+
+	for freq := range in {
+		for word, count := range freq {
+			finalFreq[word] += count
+		}
+	}
+
+	return finalFreq
+}
 
 func main() {
-	// fmt.Println("hi ia m a")
-	// fmt.Println(square(2))
-	// b := square(9)
-	// fmt.Println(b)
-	// fmt.Printf("%d", b)
-	// fmt.Printf(b)
-	// a1, b1 := divide(8, 0)
-	// if b1 != nil {
-	// 	fmt.Println(b1)
-	// 	return
-	// }
-	// fmt.Println(a1, b1)
-	var c = services.SayHello()
-	println(c)
-	// variedfunc(3.4, 12, 3, 3, 4, 45, 5)
-	// fmt.Println(variedfunc(3.2, 1, 2, 3))
-	// println(mysquart(2.3, false))
-}
+	chunks := make(chan []string)
+	results := make(chan map[string]int)
 
-// func divide(a int, b int) (int, error) {
-// 	if b == 0 {
-// 		return 0, fmt.Errorf("you cannot divide by 0")
-// 	}
-// 	g := a / b
-// 	return g, nil
+	var wg sync.WaitGroup
 
-// }
-func variedfunc(f float32, n ...int) (float32, []int) {
-	fmt.Println(f, n)
-	for i := 0; i < len(n); i++ {
-		fmt.Println(n[i])
+	// Launch goroutine to read chunks
+	if err := readChunks(fileName, chunkSize, chunks); err != nil {
+		fmt.Printf("Error reading file: %v\n", err)
+		return
 	}
-	return f, n
-}
-func mysquart(f1 float32, a bool) (f float32, ok bool) {
-	f = f1 * 2
-	ok = a
-	return
 
+	// Process chunks concurrently
+	for chunk := range chunks {
+		wg.Add(1)
+		go countWords(chunk, results, &wg)
+	}
+
+	// Close results channel after all goroutines finish
+	go func() {
+		wg.Wait()
+		close(results)
+	}()
+
+	// Merge results
+	wordCounts := mergeResults(results)
+
+	// Print word frequencies
+	for word, count := range wordCounts {
+		fmt.Printf("%s: %d\n", word, count)
+	}
 }
