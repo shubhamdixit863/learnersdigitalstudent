@@ -1,0 +1,6 @@
+TransactionID,Product,Category,CustomerID,Quantity,Price
+1,Phone,Electronics,101,2,500
+2,Laptop,Electronics,102,1,1000
+3,Shirt,clothes,101,3,20
+4,Laptop,Electronics,103,1,1000
+5,Phone,Electronics,104,1,500
