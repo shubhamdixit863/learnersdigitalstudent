@@ -17,7 +17,7 @@ func NewMonitor(fileChan chan string, wg *sync.WaitGroup) *Monitor {
 }
 
 func (m *Monitor) StartProcessing() {
-	for range 3 { 
+	for range utils.ProcessLoopCount { 
 		m.wg.Add(1)
 		go func() {
 			defer m.wg.Done()
