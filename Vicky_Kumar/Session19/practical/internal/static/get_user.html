@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get User</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Find User</h1>
+        <form onsubmit="event.preventDefault(); getUser();">
+            <input type="text" id="userId" placeholder="Enter User ID" required>
+            <button type="submit" class="btn">Get User</button>
+        </form>
+        <p id="userDetails" class="message"></p>
+    </div>
+
+    <script>
+        function getUser() {
+            const userId = document.getElementById("userId").value.trim();
+            const userDetails = document.getElementById("userDetails");
+
+            if (!userId) {
+                userDetails.textContent = "Please enter a valid User ID.";
+                userDetails.style.color = "#dc3545"; // Red for errors
+                return;
+            }
+
+            fetch(`/get?id=${userId}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("User not found.");
+                    return response.json();
+                })
+                .then(user => {
+                    userDetails.innerHTML = `<strong>ID:</strong> ${user.id} <br> 
+                                             <strong>Name:</strong> ${user.name} <br> 
+                                             <strong>Email:</strong> ${user.email}`;
+                    userDetails.style.color = "#28a745"; // Green for success
+                })
+                .catch(error => {
+                    userDetails.textContent = error.message;
+                    userDetails.style.color = "#dc3545"; // Red for errors
+                });
+        }
+    </script>
+</body>
+
+</html>
