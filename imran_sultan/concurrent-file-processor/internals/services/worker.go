@@ -5,6 +5,7 @@ import (
 	"concurrent_file_processing/internals/utils"
 	"fmt"
 	"log"
+	"math/rand"
 	"strings"
 	"sync"
 )
@@ -12,6 +13,7 @@ import (
 var (
 	WorkerId = "currently executing worker of id"
 )
+var arr = []string{"Line Filter,", "Word Count,", "Api Call,", "Retryable Api Call"}
 
 func CreatWorkerPool(wg *sync.WaitGroup) {
 	id := 0
@@ -37,9 +39,11 @@ func WorkerFunc(id int, wg *sync.WaitGroup) {
 }
 
 func ProcessAllData() {
-	fmt.Println(utils.Outputmessage)
+	RandomIntegerwithinRange := rand.Intn(3)
 	var option int
-	fmt.Scanln(&option)
+	option = RandomIntegerwithinRange
+	fmt.Println("operatin performed is ", option+1, arr)
+	fmt.Println(arr)
 
 	for textLine := range utils.FileDataOutput {
 		switch option {
