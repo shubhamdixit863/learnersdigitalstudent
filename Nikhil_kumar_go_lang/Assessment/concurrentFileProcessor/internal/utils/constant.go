@@ -1,0 +1,25 @@
+package utils
+
+const (
+	ERR_OPENING_FILE   = "Error opening file %s: %v\n"
+	ERR_READING_FILE   = "Error reading file %s: %v\n"
+	TITLE              = "Concurrent File Processor"
+	INPUT_DIR          = "Enter the directory path: "
+	NO_TXT_FOUND       = "No .txt files found in the directory."
+	PROC_FILE          = "Processing file "
+	SELECT_MODE        = "Select a mode: "
+	LINE_FILTER        = "1. Line Filter"
+	WORD_FILTER        = "2. Word Filter"
+	API_CALL           = "3. API Call"
+	RETRYABLE_API_CALL = "4. Retryable API Call"
+	TOTAL_WORDS        = "Total words: "
+	API_URL            = "https://httpbin.org/post"
+	CONTANT_TYPE       = "text/plain"
+	API_ERR            = "API Error:"
+	API_RES            = "API Response:"
+	RETRY_API          = "Retry %d for line: %s, Error: %v\n"
+	FAIL_RETRY         = "Failed after retries:"
+	INV_MODE           = "Invalid mode selected"
+	TXT                = "*.txt"
+	ENTER_KEYWORD      = "enter keyword"
+)
