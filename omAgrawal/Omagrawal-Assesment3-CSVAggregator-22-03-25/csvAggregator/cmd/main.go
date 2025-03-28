@@ -29,6 +29,9 @@ func main() {
 		wg.Add(1)
 		go services.ProcessData(Ch, v, &wg)
 	}
+
+	wg.Wait()
+	close(Ch)
 	for i := 0; i < models.N; i++ {
 		mu.Lock()
 		mpp := <-Ch
@@ -38,11 +41,10 @@ func main() {
 		}
 		mu.Unlock()
 	}
-	close(Ch)
+
 	log.Println(models.FinalOutput)
 	for key, value := range FinalMapp {
 		fmt.Println(key, "  ", value)
 	}
-	wg.Wait()
 
 }
