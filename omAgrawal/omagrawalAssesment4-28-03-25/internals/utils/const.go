@@ -7,13 +7,10 @@ import (
 
 const SplitWord = "error"
 const ApiPath = "https://httpbin.org/post"
-
 const DirName = "text"
-
 const NumberOfWorker = 3
 
 var FileInput = make(chan os.DirEntry, NumberOfWorker)
-
 var FileDataOutput = make(chan *models.ProcessedData, NumberOfWorker)
 var (
 	Outputmessage = "you Directory of Text Has been processed \n enter ypur choice for foolowing type of output\n" +

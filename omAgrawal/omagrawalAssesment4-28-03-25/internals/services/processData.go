@@ -9,13 +9,20 @@ import (
 	"strings"
 )
 
+const (
+	LineFIlterResponse = "File Name : %v Line Number %d  Line Data %s \n"
+	WordCountPrint     = "File Name : %v Line Number %d  WordCount %s \n"
+	ApiREsponsePrint   = "File Name : %v Line Number %d Statuc Code %s \n"
+)
+
 func LineFilter(data *models.ProcessedData) {
 	textdata := data.Data
 
 	splitWord := strings.Split(textdata, " ")
 	for _, w := range splitWord {
 		if w == utils.SplitWord {
-			log.Println(data.FileName, "line No. ", data.LineNumber, " line data : ", data.Data)
+			//log.Println(data.FileName, "line No. ", data.LineNumber, " line data : ", data.Data)
+			log.Printf(LineFIlterResponse, data.FileName, data.LineNumber, data.Data)
 		}
 
 	}
@@ -30,10 +37,8 @@ func WordCount(data *models.ProcessedData) {
 		WordCountv++
 		i = i
 	}
-	log.Println(data.FileName, "line No. ", data.LineNumber, " Word Count : ", WordCountv)
-
+	log.Printf(WordCountPrint, data.FileName, data.LineNumber, WordCountv)
 }
-
 func PostToApi(data *models.ProcessedData) {
 	textdata := data.Data
 	d := bytes.NewBuffer([]byte(textdata))
@@ -42,10 +47,8 @@ func PostToApi(data *models.ProcessedData) {
 	if err != nil {
 		return
 	}
-	log.Println(data.FileName, "line No. ", data.LineNumber, " Post Response ", post)
-
+	log.Printf(ApiREsponsePrint, data.FileName, data.LineNumber, post.Status)
 }
-
 func RetryPostToApi(data *models.ProcessedData) {
 	textdata := data.Data
 	d := bytes.NewBuffer([]byte(textdata))
@@ -55,10 +58,8 @@ func RetryPostToApi(data *models.ProcessedData) {
 		if err != nil {
 			Try++
 		} else {
-			log.Println(data.FileName, "line No. ", data.LineNumber, " Post Response ", post)
+			log.Printf(ApiREsponsePrint, data.FileName, data.LineNumber, post.Status)
 			return
 		}
-
 	}
-
 }

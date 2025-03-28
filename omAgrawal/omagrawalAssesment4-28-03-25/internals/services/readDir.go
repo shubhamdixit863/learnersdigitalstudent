@@ -19,10 +19,7 @@ func ReadDirFunc() {
 		utils.FileInput <- val
 	}
 	close(utils.FileInput)
-	//close(utils.FileDataOutput)
-
 }
-
 func ReadFileFunc(file os.DirEntry) string {
 	data, err := os.ReadFile(utils.DirName + "/" + file.Name())
 	if err != nil {
@@ -30,5 +27,4 @@ func ReadFileFunc(file os.DirEntry) string {
 		return ""
 	}
 	return string(data)
-
 }

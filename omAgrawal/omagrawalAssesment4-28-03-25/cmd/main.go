@@ -13,11 +13,9 @@ var (
 func main() {
 	services.ReadDirFunc()
 	services.CreatWorkerPool(&wg)
-
 	go func() {
 		wg.Wait()
 		close(utils.FileDataOutput)
 	}()
 	services.ProcessAllData()
-
 }
