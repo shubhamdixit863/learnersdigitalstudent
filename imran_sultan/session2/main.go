@@ -2,103 +2,179 @@ package main
 
 import (
 	"bufio"
+	"bytes"
+	"context"
+	"flag"
 	"fmt"
+	"io/fs"
+	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
+	"time"
 )
 
-// Configurable parameters
+// Mode represents the processing mode.
+type Mode int
+
 const (
-	chunkSize = 2          // Number of lines per chunk
-	fileName  = "book.txt" // Input file name
+	LineFilter Mode = iota
+	WordCount
+	APICall
+	RetryableAPICall
 )
 
-// readChunks reads the file and sends chunks of lines to the channel
-func readChunks(filePath string, chunkSize int, out chan<- []string) error {
-	file, err := os.Open(filePath)
-	if err != nil {
-		close(out)
-		return err
-	}
-	defer file.Close()
-	defer close(out) // Ensures channel is closed properly
-
-	scanner := bufio.NewScanner(file)
-	var lines []string
-
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-		if len(lines) >= chunkSize {
-			out <- lines
-			lines = nil
-		}
-	}
-
-	if len(lines) > 0 {
-		out <- lines
-	}
-
-	return scanner.Err()
-}
-
-// countWords counts word frequencies in a given chunk
-func countWords(lines []string, out chan<- map[string]int, wg *sync.WaitGroup) {
-	defer wg.Done()
-
-	wordFreq := make(map[string]int)
-	for _, line := range lines {
-		words := strings.Fields(strings.ToLower(line))
-		for _, word := range words {
-			word = strings.Trim(word, ".,!?;:\"'()[]{}")
-			wordFreq[word]++
-		}
-	}
-	out <- wordFreq
-}
-
-// mergeResults aggregates word frequencies from all goroutines
-func mergeResults(in <-chan map[string]int) map[string]int {
-	finalFreq := make(map[string]int)
-
-	for freq := range in {
-		for word, count := range freq {
-			finalFreq[word] += count
-		}
-	}
-
-	return finalFreq
-}
+const (
+	filterKeyword = "error"
+	apiURL        = "https://httpbin.org/post"
+	maxRetries    = 3
+	apiTimeout    = 2 * time.Second
+)
 
 func main() {
-	chunks := make(chan []string)
-	results := make(chan map[string]int)
+	// Parse command-line flags.
+	dirPath := flag.String("dir", "./textfiles", "Directory path containing .txt files")
+	modeStr := flag.String("mode", "linefilter", "Processing mode: linefilter, wordcount, apicall, retryapi")
+	flag.Parse()
 
+	if *dirPath == "" {
+		fmt.Println("Please specify a directory using -dir flag.")
+		os.Exit(1)
+	}
+
+	mode := parseMode(*modeStr)
+
+	// Create a central channel for fan-in pattern.
+	linesChan := make(chan string, 100)
 	var wg sync.WaitGroup
 
-	// Launch goroutine to read chunks
-	if err := readChunks(fileName, chunkSize, chunks); err != nil {
-		fmt.Printf("Error reading file: %v\n", err)
-		return
-	}
-
-	// Process chunks concurrently
-	for chunk := range chunks {
+	// Fan-Out: Walk through the directory and start a goroutine for each .txt file.
+	err := filepath.WalkDir(*dirPath, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		if d.IsDir() || !strings.HasSuffix(d.Name(), ".txt") {
+			return nil
+		}
 		wg.Add(1)
-		go countWords(chunk, results, &wg)
+		go readFileLines(path, linesChan, &wg)
+		return nil
+	})
+	if err != nil {
+		fmt.Printf("Error walking directory: %v\n", err)
+		os.Exit(1)
 	}
 
-	// Close results channel after all goroutines finish
+	// Close the lines channel after all file readers are done.
 	go func() {
 		wg.Wait()
-		close(results)
+		close(linesChan)
 	}()
 
-	// Merge results
-	wordCounts := mergeResults(results)
+	// Fan-In: Process the incoming lines based on the chosen mode.
+	processLines(linesChan, mode)
+}
 
-	// Print word frequencies
-	for word, count := range wordCounts {
-		fmt.Printf("%s: %d\n", word, count)
+// parseMode converts a string into a Mode constant.
+func parseMode(modeStr string) Mode {
+	switch strings.ToLower(modeStr) {
+	case "linefilter":
+		return LineFilter
+	case "wordcount":
+		return WordCount
+	case "apicall":
+		return APICall
+	case "retryapi":
+		return RetryableAPICall
+	default:
+		return LineFilter
 	}
+}
+
+// readFileLines reads a file line by line and sends each line to the provided channel.
+func readFileLines(path string, out chan<- string, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	file, err := os.Open(path)
+	if err != nil {
+		fmt.Printf("Failed to open file %s: %v\n", path, err)
+		return
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		out <- scanner.Text()
+	}
+	if err := scanner.Err(); err != nil {
+		fmt.Printf("Error reading file %s: %v\n", path, err)
+	}
+}
+
+// processLines consumes lines from the channel and processes them based on the selected mode.
+func processLines(in <-chan string, mode Mode) {
+	switch mode {
+	case LineFilter:
+		for line := range in {
+			if strings.Contains(line, filterKeyword) {
+				fmt.Println("[Filtered]", line)
+			}
+		}
+	case WordCount:
+		totalWords := 0
+		for line := range in {
+			totalWords += len(strings.Fields(line))
+		}
+		fmt.Printf("Total word count: %d\n", totalWords)
+	case APICall:
+		for line := range in {
+			callAPI(line)
+		}
+	case RetryableAPICall:
+		for line := range in {
+			callWithRetry(line, maxRetries)
+		}
+	}
+}
+
+// callAPI sends the given data to the API endpoint and prints the response status.
+func callAPI(data string) {
+	resp, err := http.Post(apiURL, "text/plain", bytes.NewBuffer([]byte(data)))
+	if err != nil {
+		fmt.Printf("API call error: %v\n", err)
+		return
+	}
+	defer resp.Body.Close()
+	fmt.Printf("API status: %s\n", resp.Status)
+}
+
+// callWithRetry sends data to the API endpoint, retrying upon failure with exponential backoff.
+func callWithRetry(data string, retries int) {
+	// var err error
+	for attempt := 0; attempt <= retries; attempt++ {
+		ctx, cancel := context.WithTimeout(context.Background(), apiTimeout)
+		req, reqErr := http.NewRequestWithContext(ctx, "POST", apiURL, bytes.NewBuffer([]byte(data)))
+		if reqErr != nil {
+			cancel()
+			fmt.Printf("Request creation error: %v\n", reqErr)
+			return
+		}
+		req.Header.Set("Content-Type", "text/plain")
+
+		resp, err := http.DefaultClient.Do(req)
+		cancel() // Ensure cancellation after the request is done.
+
+		if err == nil && resp != nil && resp.StatusCode == http.StatusOK {
+			resp.Body.Close()
+			fmt.Printf("API call succeeded after %d attempt(s)\n", attempt+1)
+			return
+		}
+		if resp != nil {
+			resp.Body.Close()
+		}
+		// Exponential backoff before next attempt.
+		time.Sleep(time.Duration(attempt+1) * time.Second)
+	}
+	fmt.Printf("API call failed after %d attempts. Data: %s\n", retries+1, data)
 }

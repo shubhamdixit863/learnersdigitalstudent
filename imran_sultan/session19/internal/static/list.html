@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People List</title>
+</head>
+<body>
+    <h2>People List</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+        </tr>
+        {{ range . }}
+        <tr>
+            <td>{{ .Name }}</td>
+            <td>{{ .PhoneNumber }}</td>
+            <td>
+                <!-- Delete Button -->
+                <form action="/delete" method="POST" style="display:inline;">
+                    <input type="hidden" name="name" value="{{ .Name }}">
+                    <button type="submit">Delete</button>
+                </form>
+
+                <!-- Update Button -->
+                <form action="/update" method="GET" style="display:inline;">
+                    <input type="hidden" name="name" value="{{ .Name }}">
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>
+        {{ end }}
+    </table>
+
+    <br>
+    <a href="/create">Add New Person</a>
+</body>
+</html>
