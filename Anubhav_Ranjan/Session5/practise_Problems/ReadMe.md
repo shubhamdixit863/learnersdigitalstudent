@@ -75,7 +75,6 @@ Implement a function to swap two integers without using a third variable.
 Write a function to find the number of trailing zeroes in the factorial of a number.
 
 
-
 	20.	Power of Two Checker:
 
 Write a function to check if a given integer is a power of two.

@@ -9,7 +9,7 @@ This tool traverses a specified directory, computes SHA-256 hashes for each file
 ## Features
 
 - **Concurrent Processing**: Uses a worker pool of goroutines to process files in parallel
-- **Configurable Workers**: Customize the number of concurrent workers via command-line flags
+- **Configurable Workers**: Customize the number of concurrent workers 
 - **Robust Error Handling**: Comprehensive error management with descriptive messages
 - **Extensible Design**: Easily add new hashing algorithms through the Strategy Pattern
 
