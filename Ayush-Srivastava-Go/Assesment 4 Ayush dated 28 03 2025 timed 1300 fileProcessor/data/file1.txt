@@ -1,0 +1,4 @@
+
+Error: Something went wrong in module A
+Info: Processing completed successfully
+Warning: Low disk space

@@ -1,0 +1,3 @@
+API request received
+API response: 200 OK
+Error: Timeout while calling external service
