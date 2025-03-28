@@ -1,0 +1,4 @@
+Starting the system check.
+Warning: Low memory detected.
+Error: Unable to load configuration file.
+Restarting the service.
