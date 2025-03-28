@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>User Management</h1>
+    <button onclick="showCreateForm()">Create User</button>
+    <div id="userForm" class="hidden">
+        <h2>Create User</h2>
+        <input type="text" id="name" placeholder="Name">
+        <input type="number" id="age" placeholder="Age">
+        <button onclick="createUser()">Submit</button>
+    </div>
+    <h2>Users List</h2>
+    <div id="userList"></div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        text-align: center;
+    }
+    .container {
+        max-width: 600px;
+        margin: auto;
+    }
+    .hidden {
+        display: none;
+    }
+    .user-card {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+    button {
+        margin: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+
+<script>
+    async function fetchUsers() {
+        const response = await fetch('/get/user');
+        const data = await response.json();
+        const userList = document.getElementById('userList');
+        userList.innerHTML = '';
+        data.Slice.forEach(user => {
+            const userDiv = document.createElement('div');
+            userDiv.className = 'user-card';
+            userDiv.innerHTML = `
+                <span>${user.name} (Age: ${user.age})</span>
+                <button onclick="editUser('${user.id}')">Edit</button>
+                <button onclick="deleteUser('${user.id}')">Delete</button>
+            `;
+            userList.appendChild(userDiv);
+        });
+    }
+
+    function showCreateForm() {
+        document.getElementById('userForm').classList.toggle('hidden');
+    }
+
+    async function createUser() {
+        const name = document.getElementById('name').value;
+        const age = document.getElementById('age').value;
+        await fetch('/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, age, id: `user${Date.now()}` })
+        });
+        fetchUsers();
+    }
+
+    async function deleteUser(id) {
+        await fetch(`/delete?id=${id}`, { method: 'DELETE' });
+        fetchUsers();
+    }
+
+    function editUser(id) {
+        const newName = prompt('Enter new name:');
+        const newAge = prompt('Enter new age:');
+        fetch(`/update?id=${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: newName, age: newAge, id })
+        }).then(fetchUsers);
+    }
+
+    fetchUsers();
+</script>
