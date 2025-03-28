@@ -1,9 +1,9 @@
 package main
 
 import (
+	"concurrentFileProcessor/internal/mode"
 	"concurrentFileProcessor/internal/services"
 	"concurrentFileProcessor/internal/utils"
-	"concurrentFileProcessor/mode"
 	"fmt"
 	"log"
 	"sync"
