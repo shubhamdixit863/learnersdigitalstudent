@@ -1,0 +1,3 @@
+Hello, this is a test file.
+Golang is great for concurrent programming.
+This program is implementing the fan-in/fan-out pattern in Go.

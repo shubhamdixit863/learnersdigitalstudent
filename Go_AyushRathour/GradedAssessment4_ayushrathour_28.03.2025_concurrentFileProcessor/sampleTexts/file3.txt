@@ -1,0 +1,4 @@
+Concurrency in Go is powerful.
+Go uses goroutines for lightweight threading.
+Channels help in communication between goroutines.
+Word count testing file.

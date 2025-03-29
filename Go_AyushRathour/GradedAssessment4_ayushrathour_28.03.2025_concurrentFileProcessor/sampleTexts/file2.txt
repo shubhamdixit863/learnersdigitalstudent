@@ -1,0 +1,5 @@
+INFO: Server started at port 8080.
+ERROR: Database connection failed.
+INFO: Request received from 127.0.0.1.
+ERROR: Timeout occurred while processing request.
+WARNING: Disk usage reaching limit.
