@@ -27,7 +27,7 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(registeredUser)
 }
 
-// GetUser retrieves a user by ID or all users
+// GetUser function retrieves a user by ID or all users
 func GetUser(w http.ResponseWriter, r *http.Request) {
 	idParam := r.URL.Query().Get("id")
 

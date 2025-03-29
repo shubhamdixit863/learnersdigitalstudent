@@ -87,4 +87,4 @@ function deleteUser(id) {
 }
 
 // Load users when page loads
-window.onload = getAllUsers;
+window.onload = getUsers;
