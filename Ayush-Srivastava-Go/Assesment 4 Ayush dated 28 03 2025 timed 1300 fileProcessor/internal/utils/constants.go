@@ -17,6 +17,7 @@ const (
 	APIFailed            = "Failed"
 	APIRetying           = "Retrying API call"
 	SearchedDirectory    = "./data"
+	APIRetryAttempts     = 3
 )
 
 var Modes = []string{"word_count", "filter", "api_call"}

@@ -55,7 +55,7 @@ func APICall(lineChannel <-chan string){
 		go func(data string){
 			defer wg.Done()
 
-			status := utils.SendAPI(data, 3)
+			status := utils.SendAPI(data, utils.APIRetryAttempts)
 			fmt.Println(utils.APIStatus, status)
 
 		}(line)

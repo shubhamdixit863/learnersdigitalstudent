@@ -65,7 +65,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Add("Content-Type", "application/json")
+	w.Header().Add("Content-Type", utils.ContentType)
 
 
 	for _, user := range users {
@@ -116,7 +116,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	
-	w.Header().Add("Content-Type", "application/json")
+	w.Header().Add("Content-Type", utils.ContentType)
 
 
 	for index, user := range users {
@@ -155,7 +155,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Add("Content-Type", "application/json")
+	w.Header().Add("Content-Type", utils.ContentType)
 
 
 	for i, user := range users {

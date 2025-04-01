@@ -9,4 +9,5 @@ const (
 	InvalidIDParamError     = "Invalid ID parameter"
 	UserNotFoundError       = "User not found"
 	SearchByIDParam         = "id"
+	ContentType             = "application/json"
 )
