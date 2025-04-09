@@ -15,6 +15,7 @@ func RetryCallAPI(storage map[string]string, url string) {
 				log.Println(response)
 				break
 			}
+			log.Println("Retrying...")
 		}
 	}
 }
