@@ -1,4 +1,5 @@
-module session20
+module crud
+
 
 go 1.23.4
 
