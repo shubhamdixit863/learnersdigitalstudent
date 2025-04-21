@@ -8,12 +8,19 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"log"
+	"net/http"
 )
+
+func PingHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"message": "pong",
+	})
+}
 
 func main() {
 
 	r := gin.Default()
-
+	r.GET("/ping", PingHandler)
 	err := godotenv.Load(".env")
 	if err != nil {
 		log.Fatal("Error loading .env file")
@@ -31,7 +38,7 @@ func main() {
 	user := v1.Group("/user")
 	user.GET("/getUsers", middlewares.AuthorizationMiddleware(), handler.GetAllUsers)
 
-	err = r.Run("localhost:8090")
+	err = r.Run("0.0.0.0:8090")
 	if err != nil {
 		return
 	}

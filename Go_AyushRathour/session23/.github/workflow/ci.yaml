@@ -1,0 +1,38 @@
+name: Deploy to Server via SSH
+
+on:
+  push:
+    branches:
+      - main # or 'master'
+
+jobs:
+  deploy:
+    name: Deploy to Remote Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+        shell: bash
+
+      - name: Add Known Hosts
+        run: |
+          ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+        shell: bash
+
+      - name: Deploy Application
+        run: |
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /home/ubuntu/simple-gin-app
+            pkill -f ./myapp
+            git pull origin master
+            go build -o myapp main.go
+            nohup ./myapp > myapp.log 2>&1 &
+          EOF
+        shell: bash
