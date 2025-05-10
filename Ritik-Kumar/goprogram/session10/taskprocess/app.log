@@ -1,0 +1,75 @@
+2025/03/06 10:37:42 Task Processing System Started
+2025/03/06 10:37:42 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 1)
+2025/03/06 10:37:43 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 2)
+2025/03/06 10:37:44 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 3)
+2025/03/06 10:37:45 Task failed after 3 retries
+2025/03/06 10:37:45 Error executing task: Task APICallTask failed: API request failed (Retry: 1)
+2025/03/06 10:37:46 Error executing task: Task APICallTask failed: API request failed (Retry: 2)
+2025/03/06 10:37:47 Error executing task: Task APICallTask failed: API request failed (Retry: 3)
+2025/03/06 10:37:48 Task failed after 3 retries
+2025/03/06 10:37:48 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 1)
+2025/03/06 10:37:49 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 2)
+2025/03/06 10:37:50 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 3)
+2025/03/06 10:37:51 Task failed after 3 retries
+2025/03/06 10:37:51 Failed tasks saved to log file
+2025/03/06 10:37:51 Task Processing System Completed
+2025/03/06 12:35:01 Task Processing System Started
+2025/03/06 12:35:01 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 1)
+2025/03/06 12:35:02 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 2)
+2025/03/06 12:35:03 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 3)
+2025/03/06 12:35:04 Task failed after 3 retries
+2025/03/06 12:35:04 Error executing task: Task APICallTask failed: API request failed (Retry: 1)
+2025/03/06 12:35:05 Error executing task: Task APICallTask failed: API request failed (Retry: 2)
+2025/03/06 12:35:06 Error executing task: Task APICallTask failed: API request failed (Retry: 3)
+2025/03/06 12:35:07 Task failed after 3 retries
+2025/03/06 12:35:07 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 1)
+2025/03/06 12:35:08 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 2)
+2025/03/06 12:35:09 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 3)
+2025/03/06 12:35:10 Task failed after 3 retries
+2025/03/06 12:35:10 Failed tasks saved to log file
+2025/03/06 12:35:10 Task Processing System Completed
+2025/03/06 12:35:24 Task Processing System Started
+2025/03/06 12:35:24 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 1)
+2025/03/06 12:35:25 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 2)
+2025/03/06 12:35:26 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 3)
+2025/03/06 12:35:27 Task failed after 3 retries
+2025/03/06 12:35:27 Error executing task: Task APICallTask failed: API request failed (Retry: 1)
+2025/03/06 12:35:28 Error executing task: Task APICallTask failed: API request failed (Retry: 2)
+2025/03/06 12:35:29 Error executing task: Task APICallTask failed: API request failed (Retry: 3)
+2025/03/06 12:35:30 Task failed after 3 retries
+2025/03/06 12:35:30 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 1)
+2025/03/06 12:35:31 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 2)
+2025/03/06 12:35:32 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 3)
+2025/03/06 12:35:33 Task failed after 3 retries
+2025/03/06 12:35:33 Failed tasks saved to log file
+2025/03/06 12:35:33 Task Processing System Completed
+2025/03/06 12:36:33 Task Processing System Started
+2025/03/06 12:36:33 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 1)
+2025/03/06 12:36:34 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 2)
+2025/03/06 12:36:35 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 3)
+2025/03/06 12:36:36 Task failed after 3 retries
+2025/03/06 12:36:36 Error executing task: Task APICallTask failed: API request failed (Retry: 1)
+2025/03/06 12:36:37 Error executing task: Task APICallTask failed: API request failed (Retry: 2)
+2025/03/06 12:36:38 Error executing task: Task APICallTask failed: API request failed (Retry: 3)
+2025/03/06 12:36:39 Task failed after 3 retries
+2025/03/06 12:36:39 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 1)
+2025/03/06 12:36:40 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 2)
+2025/03/06 12:36:41 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 3)
+2025/03/06 12:36:42 Task failed after 3 retries
+2025/03/06 12:36:42 Failed tasks saved to log file
+2025/03/06 12:36:42 Task Processing System Completed
+2025/03/12 09:13:09 Task Processing System Started
+2025/03/12 09:13:09 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 1)
+2025/03/12 09:13:10 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 2)
+2025/03/12 09:13:11 Error executing task: Task FileProcessingTask failed: failed to open file (Retry: 3)
+2025/03/12 09:13:12 Task failed after 3 retries
+2025/03/12 09:13:12 Error executing task: Task APICallTask failed: API request failed (Retry: 1)
+2025/03/12 09:13:13 Error executing task: Task APICallTask failed: API request failed (Retry: 2)
+2025/03/12 09:13:14 Error executing task: Task APICallTask failed: API request failed (Retry: 3)
+2025/03/12 09:13:15 Task failed after 3 retries
+2025/03/12 09:13:15 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 1)
+2025/03/12 09:13:16 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 2)
+2025/03/12 09:13:17 Error executing task: Task DataValidationTask failed: data cannot be empty (Retry: 3)
+2025/03/12 09:13:18 Task failed after 3 retries
+2025/03/12 09:13:18 Failed tasks saved to log file
+2025/03/12 09:13:18 Task Processing System Completed
