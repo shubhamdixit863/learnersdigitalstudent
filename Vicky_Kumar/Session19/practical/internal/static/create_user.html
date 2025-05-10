@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create User</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Create User</h1>
+        <form id="createUserForm">
+            <input type="text" id="id" placeholder="Id" required>
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit" class="btn">Create</button>
+        </form>
+        <p id="message" class="message"></p>
+    </div>
+
+    <script>
+        document.getElementById("createUserForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const id = document.getElementById("id").value.trim();
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const messageBox = document.getElementById("message");
+
+            fetch("/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id, name, email })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        messageBox.textContent = "User created successfully! Redirecting...";
+                        messageBox.style.color = "#28a745"; // Green success message
+                        setTimeout(() => window.location.href = "index.html", 2000);
+                    } else {
+                        console.log(data.message)
+                        throw new Error(data.message || "Failed to create user.");
+                    }
+                })
+                .catch(error => {
+                    messageBox.textContent = error.message;
+                    messageBox.style.color = "#dc3545"; // Red error message
+                });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete User</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Delete User</h1>
+        <form id="deleteUserForm">
+            <input type="text" id="userId" placeholder="Enter User ID" required>
+            <button type="submit" class="btn delete-btn">Delete</button>
+        </form>
+        <p id="responseMessage" class="message"></p>
+    </div>
+
+    <script>
+        document.getElementById("deleteUserForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let userId = document.getElementById("userId").value.trim();
+            let responseMessage = document.getElementById("responseMessage");
+
+            if (!userId) {
+                responseMessage.textContent = "Please enter a valid User ID.";
+                responseMessage.style.color = "#dc3545";
+                return;
+            }
+
+            // Confirm deletion before proceeding
+            if (!confirm("Are you sure you want to delete this user? This action cannot be undone!")) {
+                return;
+            }
+
+            fetch(`/delete?id=${userId}`, { method: "DELETE" })
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to delete user. Check the ID.");
+                    return;
+                })
+                .then(data => {
+                    responseMessage.textContent = "User deleted successfully!";
+                    responseMessage.style.color = "#28a745";
+                })
+                .catch(error => {
+                    responseMessage.textContent = error.message;
+                    responseMessage.style.color = "#dc3545";
+                });
+        });
+    </script>
+</body>
+
+</html>

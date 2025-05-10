@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Edit User</h1>
+        <form id="editUserForm">
+            <input type="text" id="userId" placeholder="User ID" required>
+            <input type="text" id="name" placeholder="New Name">
+            <input type="email" id="email" placeholder="New Email">
+            <button type="submit" class="btn">Update</button>
+        </form>
+        <p id="responseMessage" class="message"></p>
+        <div id="updatedUserDetails" class="user-details"></div>
+    </div>
+
+    <script>
+        document.getElementById("editUserForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let userId = document.getElementById("userId").value.trim();
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let responseMessage = document.getElementById("responseMessage");
+            let userDetailsDiv = document.getElementById("updatedUserDetails");
+
+            if (!userId) {
+                responseMessage.textContent = "Please enter a valid User ID.";
+                responseMessage.style.color = "#dc3545";
+                return;
+            }
+
+            fetch(`/update?id=${userId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email })
+            })
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to update user. Check the ID.");
+                    return response.json();
+                })
+                .then(data => {
+                    responseMessage.textContent = "User updated successfully!";
+                    responseMessage.style.color = "#28a745";
+
+                    // Display updated user details
+                    userDetailsDiv.innerHTML = `
+                    <p><strong>ID:</strong> ${data.id}</p>
+                    <p><strong>Name:</strong> ${data.name || "Not changed"}</p>
+                    <p><strong>Email:</strong> ${data.email || "Not changed"}</p>
+                `;
+                })
+                .catch(error => {
+                    responseMessage.textContent = error.message;
+                    responseMessage.style.color = "#dc3545";
+                    userDetailsDiv.innerHTML = "";
+                });
+        });
+    </script>
+</body>
+
+</html>
