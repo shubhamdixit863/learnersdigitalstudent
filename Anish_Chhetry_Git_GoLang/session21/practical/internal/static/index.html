@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="container">
+    <div class="action-section">
+        <h2>Create User</h2>
+        <input type="text" id="createName" placeholder="Name">
+        <button onclick="createUser()">Create</button>
+    </div>
+
+    <div class="action-section">
+        <h2>Update User</h2>
+        <input type="text" id="updateId" placeholder="ID">
+        <input type="text" id="updateName" placeholder="New Name">
+        <button onclick="updateUser()">Update</button>
+    </div>
+
+    <div class="action-section">
+        <h2>Delete User</h2>
+        <input type="text" id="deleteId" placeholder="ID">
+        <button onclick="deleteUser()">Delete</button>
+    </div>
+
+    <div class="action-section">
+        <h2>Get User by ID</h2>
+        <input type="text" id="getById" placeholder="ID">
+        <button onclick="getUserById(document.getElementById('getById').value)">Get</button>
+    </div>
+</div>
+
+<div class="table-container">
+    <h2>User List</h2>
+    <button class="refresh-btn" onclick="getUsers()">Get Users List</button>
+    <table id="userTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
