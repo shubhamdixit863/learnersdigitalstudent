@@ -1,0 +1,98 @@
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f4f7fc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  background: #fff;
+  width: 90%;
+  max-width: 600px;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Headings */
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 20px;
+  color: #555;
+  margin-top: 20px;
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Buttons */
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #007bff;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* User List */
+ul {
+  list-style: none;
+  margin-top: 15px;
+}
+
+ul li {
+  background: #f1f1f1;
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    padding: 15px;
+  }
+}

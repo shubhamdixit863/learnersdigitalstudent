@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>User Management System</h1>
+
+      <h2>Register User</h2>
+      <input type="text" id="name" placeholder="Name" />
+      <input type="email" id="email" placeholder="Email" />
+      <button onclick="registerUser()">Register</button>
+
+      <h2>Get Users</h2>
+      <button onclick="getUsers()">Fetch Users</button>
+      <ul id="userList"></ul>
+
+      <h2>Update User</h2>
+      <input type="number" id="updateId" placeholder="User ID" />
+      <input type="text" id="updateName" placeholder="New Name" />
+      <input type="email" id="updateEmail" placeholder="New Email" />
+      <button onclick="updateUser()">Update</button>
+
+      <h2>Delete User</h2>
+      <input type="number" id="deleteId" placeholder="User ID" />
+      <button onclick="deleteUser()">Delete</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

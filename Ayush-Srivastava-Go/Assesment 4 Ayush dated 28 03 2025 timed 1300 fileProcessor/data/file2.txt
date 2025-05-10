@@ -1,0 +1,3 @@
+User login attempt failed
+error: Invalid credentials
+Debug: Checking user session data
