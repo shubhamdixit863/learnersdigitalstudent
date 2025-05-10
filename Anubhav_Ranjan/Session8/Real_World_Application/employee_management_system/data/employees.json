@@ -1,0 +1,55 @@
+[
+
+    {
+
+        "id": 101,
+
+        "name": "Alice Johnson",
+
+        "age": 28,
+
+        "department": "Engineering",
+
+        "salary": 75000.50,
+
+        "address": {
+
+            "street": "123 Main St",
+
+            "city": "San Francisco",
+
+            "zipCode": "94107"
+
+        },
+
+        "skills": ["Go", "Kubernetes", "Docker"]
+
+    },
+
+    {
+
+        "id": 102,
+
+        "name": "Robert Brown",
+
+        "age": 55,
+
+        "department": "Finance",
+
+        "salary": 85000.75,
+
+        "address": {
+
+            "street": "456 Elm St",
+
+            "city": "New York",
+
+            "zipCode": "10001"
+
+        },
+
+        "skills": ["Accounting", "Excel", "Financial Analysis"]
+
+    }
+
+]

@@ -1,0 +1,6 @@
+Error: 2025/03/06 14:55:52 Task FileProcessingTask failed: Task 'FileProcessingTask' failed: open ../helloWorld.txt: The system cannot find the file specified.
+Error: 2025/03/06 14:55:55 Task FileProcessingTask failed: Task 'FileProcessingTask' failed: open ../hello.txt: The system cannot find the file specified.
+Error: 2025/03/06 14:55:57 Task DataValidationTask failed: Validation failed for field 'UserName': Name must contain only letters and spaces, and be 2 to 50 characters long
+Error: 2025/03/06 14:55:59 Task DataValidationTask failed: Validation failed for field 'Email': Invalid email format
+Error: 2025/03/06 14:56:01 Task DataValidationTask failed: Validation failed for field 'Phone': Invalid phone number format
+Error: 2025/03/06 14:56:03 Task APICallTask failed: Task 'APICallTask' failed: API call failed: Get "https://githhhub.com/feelinganubhav": dial tcp: lookup githhhub.com: no such host

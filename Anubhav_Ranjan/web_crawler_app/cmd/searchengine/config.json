@@ -1,0 +1,11 @@
+{
+  "start_urls": [
+    "https://golang.org"
+  ],
+  "crawl_depth": 1,
+  "max_concurrent_requests": 10,
+  "index_file_path": "index.json",
+  "channel_buffer_size": 100,
+  "db_connection_string": "localhost:27017",
+  "db_name": "searchengine"
+}
